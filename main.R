@@ -13,6 +13,16 @@ if (file.exists('output')){
   dir.create('output')
 }
 
+# Install packages if missing
+pkgs <- c("lme4", "multcomp", "ggplot2", "tictoc")
+
+install_if_missing <- function(pkgs) {
+  new_pkgs <- pkgs[!(pkgs %in% installed.packages()[, "Package"])]
+  if (length(new_pkgs)) install.packages(new_pkgs, dependencies = TRUE)
+}
+
+install_if_missing(pkgs)
+
 # libraries
 library(lme4) # for random effects model
 library(multcomp) # for linear combination for regression coefs.
